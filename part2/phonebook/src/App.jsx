@@ -6,7 +6,7 @@ import PersonForm from "./components/PersonForm";
 import peopleService from "./services/persons";
 
 const App = () => {
-  const [persons, setPersons] = useState([]);
+  const [persons, setPersons] = useState(null);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
