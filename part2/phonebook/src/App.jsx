@@ -30,7 +30,10 @@ const App = () => {
         console.log("Failed to fetch people list");
       });
   }, []);
-  console.log("render", persons.length, "notes");
+
+  if (!persons) {
+    return null;
+  }
 
   const AddPerson = (event) => {
     event.preventDefault();
