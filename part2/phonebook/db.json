@@ -16,9 +16,25 @@
       "id": "3"
     },
     {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": "4"
+      "name": "Dingus",
+      "number": "12345-67-89-10",
+      "id": "skODO2d-7nc"
+    },
+    {
+      "name": "DSingusa123",
+      "number": "123",
+      "id": "mt1_7WMOSkM"
+    },
+    {
+      "name": "asd",
+      "number": "123",
+      "id": "SGo6wxiaGrQ"
+    },
+    {
+      "name": "asedaedas",
+      "number": "chungus",
+      "id": "lHtWcYwGnxE"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
