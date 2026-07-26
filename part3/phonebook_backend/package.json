@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "First few exercises in part3",
+  "keywords": [
+    "keyword",
+    "keyword",
+    "keyword"
+  ],
+  "homepage": "https://github.com/1lu4d/fullstack-open#readme",
+  "bugs": {
+    "url": "https://github.com/1lu4d/fullstack-open/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/1lu4d/fullstack-open.git"
+  },
+  "license": "MIT",
+  "author": "Ilia Novozhilov",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
