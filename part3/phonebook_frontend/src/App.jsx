@@ -164,6 +164,15 @@ const App = () => {
       />
       <h3>Numbers</h3>
       <Persons peopleToShow={peopleToShow} handleRemove={handleRemove} />
+      <h3>Repository</h3>
+      <a
+        href="https://github.com/1lu4d/fullstack-open"
+        class="github-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub
+      </a>
     </div>
   );
 };
