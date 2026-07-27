@@ -12,7 +12,7 @@ morgan.token("body", (req) => {
 });
 
 app.use(cors());
-app.use(express.json());
+app.use(express.static("dist")); // express.json() for dev
 app.use(
   morgan(
     ":method :url :status :res[content-length] - :response-time ms Data: :body",
@@ -91,6 +91,8 @@ app.put("/api/persons/:id", (request, response) => {
 
   const person = persons.find((person) => person.id === id);
 
+  console.log(person);
+
   if (person) {
     const updatedPerson = {
       ...person,
@@ -130,13 +132,13 @@ app.get("/info", (request, response) => {
     `);
 });
 
-const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown endpoint" });
 };
 
 app.use(unknownEndpoint);
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
