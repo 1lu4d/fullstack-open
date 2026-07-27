@@ -86,28 +86,30 @@ app.post("/api/persons", (request, response) => {
   response.json(person);
 });
 
-app.put("/api/persons/:id", (request, response) => {
-  const id = request.params.id;
-  const body = request.body;
+// Definitelly nothing to see here (It will be back)
 
-  const person = persons.find((person) => person.id === id);
+// app.put("/api/persons/:id", (request, response) => {
+//   const id = request.params.id;
+//   const body = request.body;
 
-  console.log(person);
+//   const person = persons.find((person) => person.id === id);
 
-  if (person) {
-    const updatedPerson = {
-      ...person,
-      number: body.number,
-    };
+//   console.log(person);
 
-    persons = persons.map((person) =>
-      person.id !== id ? person : updatedPerson,
-    );
-    response.json(updatedPerson);
-  } else {
-    response.status(404).end();
-  }
-});
+//   if (person) {
+//     const updatedPerson = {
+//       ...person,
+//       number: body.number,
+//     };
+
+//     persons = persons.map((person) =>
+//       person.id !== id ? person : updatedPerson,
+//     );
+//     response.json(updatedPerson);
+//   } else {
+//     response.status(404).end();
+//   }
+// });
 
 app.delete("/api/persons/:id", (request, response) => {
   const id = request.params.id;
