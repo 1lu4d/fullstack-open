@@ -1,9 +1,8 @@
 const express = require("express");
 const http = require("http");
 const app = express();
+const cors = require("cors");
 var morgan = require("morgan");
-
-app.use(express.json());
 
 morgan.token("body", (req) => {
   if (req.method === "POST" && req.body) {
@@ -11,6 +10,9 @@ morgan.token("body", (req) => {
   }
   return "";
 });
+
+app.use(cors());
+app.use(express.json());
 app.use(
   morgan(
     ":method :url :status :res[content-length] - :response-time ms Data: :body",
@@ -48,10 +50,10 @@ const generateId = () => {
 
 app.get("/api/persons/:id", (request, response) => {
   const id = request.params.id;
-  const note = persons.find((note) => note.id === id);
+  const person = persons.find((person) => person.id === id);
 
-  if (note) {
-    response.json(note);
+  if (person) {
+    response.json(person);
   } else {
     response.status(404).end();
   }
@@ -59,8 +61,6 @@ app.get("/api/persons/:id", (request, response) => {
 
 app.post("/api/persons", (request, response) => {
   const body = request.body;
-
-  console.log(body);
 
   if (!body.name || !body.number) {
     return response.status(400).json({
@@ -74,20 +74,41 @@ app.post("/api/persons", (request, response) => {
     });
   }
 
-  const note = {
+  const person = {
     id: generateId(),
     name: body.name,
     number: body.number,
   };
 
-  persons = persons.concat(note);
+  persons = persons.concat(person);
 
-  response.json(note);
+  response.json(person);
+});
+
+app.put("/api/persons/:id", (request, response) => {
+  const id = request.params.id;
+  const body = request.body;
+
+  const person = persons.find((person) => person.id === id);
+
+  if (person) {
+    const updatedPerson = {
+      ...person,
+      number: body.number,
+    };
+
+    persons = persons.map((person) =>
+      person.id !== id ? person : updatedPerson,
+    );
+    response.json(updatedPerson);
+  } else {
+    response.status(404).end();
+  }
 });
 
 app.delete("/api/persons/:id", (request, response) => {
   const id = request.params.id;
-  persons = persons.filter((note) => note.id !== id);
+  persons = persons.filter((person) => person.id !== id);
   console.log(persons);
 
   response.status(204).end();
