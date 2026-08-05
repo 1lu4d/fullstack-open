@@ -103,8 +103,14 @@ const App = () => {
           setMessageType("");
         }, 5000);
       })
-      .catch(() => {
-        console.log("Something went wrong");
+      .catch((error) => {
+        console.log(error.response.data.error); // The actual validation message
+        setMessageType("fail");
+        setMessage(error.response.data.error || "Something went wrong");
+        setTimeout(() => {
+          setMessage(null);
+          setMessageType("");
+        }, 5000);
       });
   };
 
@@ -164,6 +170,15 @@ const App = () => {
       />
       <h3>Numbers</h3>
       <Persons peopleToShow={peopleToShow} handleRemove={handleRemove} />
+      <h3>Repository</h3>
+      <a
+        href="https://github.com/1lu4d/fullstack-open"
+        class="github-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub
+      </a>
     </div>
   );
 };

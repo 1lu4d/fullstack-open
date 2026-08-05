@@ -1,5 +1,155 @@
+/* General styling */
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    sans-serif;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  background: #f8f9fa;
+  color: #2d3748;
+  line-height: 1.6;
+}
+
+#root {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Headers */
 h2 {
-  color: green;
+  color: #1a202c;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  color: #2d3748;
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Filter input */
+#root > div > div:first-of-type {
+  background: #f7fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+#root > div > div:first-of-type input {
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  width: 200px;
+}
+
+#root > div > div:first-of-type input:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+/* Form styling */
+form {
+  background: #f7fafc;
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+form div {
+  margin-bottom: 0.75rem;
+}
+
+form div:last-of-type {
+  margin-bottom: 0;
+}
+
+form input {
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  width: 200px;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+}
+
+.note {
+  background: #f7fafc;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+  font-size: 0.95rem;
+}
+
+.note:hover {
+  background: #edf2f7;
+}
+
+.note button {
+}
+
+.github-btn {
+  display: inline-block;
+  background: #2d3748;
+  color: white !important;
+  text-decoration: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.github-btn:hover {
+  background: #1a202c;
+  transform: translateY(-1px);
+}
+
+.github-btn:active {
+  transform: translateY(0);
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .note {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }
 .note {
   color: grey;
@@ -23,4 +173,132 @@ h2 {
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+}
+.github-btn {
+  display: inline-block;
+  padding: 0.9rem 2.4rem;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  color: #fff;
+
+  background: #238636;
+  box-shadow:
+    0 0 0 2px #23863644,
+    0 8px 20px rgba(0, 0, 0, 0.6);
+
+  transition: 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.github-btn:hover {
+  background: #2ea043;
+  transform: scale(1.04) translateY(-3px);
+  box-shadow:
+    0 0 0 4px #23863688,
+    0 12px 28px rgba(35, 134, 54, 0.4);
+}
+
+.github-btn:active {
+  transform: scale(0.96) translateY(0px);
+  box-shadow:
+    0 0 0 3px #238636aa,
+    0 4px 12px rgba(0, 0, 0, 0.5);
+  transition-duration: 0.08s;
+}
+
+.github-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: 0.5s;
+  pointer-events: none;
+  border-radius: 40px;
+}
+
+.github-btn:hover::after {
+  transform: translateX(100%);
+}
+
+.github-btn span {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+@media (max-width: 480px) {
+  .github-btn {
+    font-size: 1.1rem;
+    padding: 0.7rem 1.8rem;
+  }
+}
+.note button {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 0.3rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 60px;
+}
+
+.note button:hover {
+  background: #dc2626;
+  color: white;
+  border-color: #dc2626;
+  transform: scale(1.02);
+}
+
+.note button:active {
+  transform: scale(0.95);
+}
+
+.note button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3);
+}
+form div:last-child button {
+  background: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 80px;
+}
+
+form div:last-child button:hover {
+  background: #3182ce;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(66, 153, 225, 0.3);
+}
+
+form div:last-child button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+form div:last-child button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.4);
 }
