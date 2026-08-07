@@ -23,8 +23,9 @@
     "start": "node index.js",
     "dev": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "rm -rf dist && cd ../part2/phonebook && npm run build && cp -r dist ../part3",
-    "deploy:full": "npm run build:ui && git add . && git commit -m \"PART3: 3.11 - Dist build %DATE%\"&& git push origin main"
+    "build:ui": "rm -rf dist && cd ../part2/phonebook && npm run build && cp -r dist ../../part3",
+    "deploy:full": "npm run build:ui && git add dist -f && git commit -m \"PART3: Dist build\"&& git push origin main",
+    "lint": "eslint ."
   },
   "dependencies": {
     "cors": "^2.8.6",
@@ -33,5 +34,12 @@
     "mongodb": "^7.5.0",
     "mongoose": "^9.9.1",
     "morgan": "^1.11.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.9.0"
   }
 }
