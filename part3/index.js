@@ -66,7 +66,7 @@ app.post("/api/persons", (request, response, next) => {
     { name: body.name },
     { name: body.name, number: body.number },
     {
-      new: true,
+      returnDocument: "after",
       upsert: true,
       runValidators: true,
       context: "query",
@@ -86,7 +86,7 @@ app.put("/api/persons/:id", (request, response, next) => {
   Person.findByIdAndUpdate(
     request.params.id,
     { name, number },
-    { new: true, runValidators: true, context: "query" },
+    { returnDocument: "after", runValidators: true, context: "query" },
   )
     .then((updatedPerson) => {
       if (updatedPerson) {

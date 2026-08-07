@@ -1,4 +1,4 @@
-DELETE  http://localhost:3001/api/persons/6a732ed8e8d9e3185668511e
+GET  http://localhost:3001/api/persons/6a732eaa2b50799dd60e1a4a
 # Content-Type: application/json
 
 # {

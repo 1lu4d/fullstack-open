@@ -23,7 +23,7 @@
     "start": "node index.js",
     "dev": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "rm -rf dist && cd ../phonebook_frontend && npm run build && cp -r dist ../phonebook_backend",
+    "build:ui": "rm -rf dist && cd ../part2/phonebook && npm run build && cp -r dist ../part3",
     "deploy:full": "npm run build:ui && git add . && git commit -m \"PART3: 3.11 - Dist build %DATE%\"&& git push origin main"
   },
   "dependencies": {
