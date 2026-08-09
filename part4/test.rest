@@ -1,0 +1,9 @@
+POST  http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Super blog",
+  "author": "1lu4d",
+  "url": "https://cs50.ly/surprise",
+  "likes": 359000
+}

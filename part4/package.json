@@ -1,0 +1,32 @@
+{
+  "name": "part4",
+  "version": "1.0.0",
+  "description": "Part 4",
+  "keywords": [
+    "keyword",
+    "keyword",
+    "keyword"
+  ],
+  "homepage": "https://github.com/1lu4d/fullstack-open#readme",
+  "bugs": {
+    "url": "https://github.com/1lu4d/fullstack-open/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/1lu4d/fullstack-open.git"
+  },
+  "author": "1lu4d",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.9.1"
+  }
+}

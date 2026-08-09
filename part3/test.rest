@@ -1,7 +1,0 @@
-GET  http://localhost:3001/api/persons/6a732eaa2b50799dd60e1a4a
-# Content-Type: application/json
-
-# {
-#     "name":"Dignus",
-#     "number":"12345-67-89"
-# }
