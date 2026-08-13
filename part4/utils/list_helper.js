@@ -40,7 +40,7 @@ const mostLikes = (blogs) => {
     return null
   }
 
-  // Группируем по автору и суммируем лайки
+  // Group by author and sum up likes
   const authorLikes = _(blogs)
     .groupBy('author')
     .map((blogs, author) => ({
@@ -49,7 +49,7 @@ const mostLikes = (blogs) => {
     }))
     .value()
 
-  // Находим автора с максимумом лайков
+  // Find author and max likes
   return _.maxBy(authorLikes, 'likes')
 }
 
