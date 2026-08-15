@@ -1,8 +1,10 @@
-POST  http://localhost:3003/api/login
+POST  http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjZhN2VkNzViMmEyMjJiMTcxZmNlNDIzMyIsImlhdCI6MTc4NjgwOTg2OSwiZXhwIjoxNzg2ODEzNDY5fQ.b_etu3k7_eckuNrMKeGrC6F7Uwbawljys0eGyu3lRyA
 
-{
-  "username": "root",
-  "password": "root"
-}
+  {
+    "title": "Go To Hell",
+    "author": "Devil",
+    "url": "http://He.ll",
+    "likes": 5
+  }
