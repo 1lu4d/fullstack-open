@@ -1,11 +1,16 @@
+import { useState } from "react";
+
 const CreateForm = (props) => {
+  const [newTitle, setNewTitle] = useState("");
+  const [newAuthor, setNewAuthor] = useState("");
+  const [newUrl, setNewUrl] = useState("");
   return (
     <form onSubmit={props.CreateBlog}>
       <div>
         title:{" "}
         <input
-          value={props.newTitle}
-          onChange={(event) => props.setNewTitle(event.target.value)}
+          value={newTitle}
+          onChange={(event) => setNewTitle(event.target.value)}
           required
           type="text"
           placeholder="Yor title"
@@ -14,8 +19,8 @@ const CreateForm = (props) => {
       <div>
         author:{" "}
         <input
-          value={props.newAuthor}
-          onChange={(event) => props.setNewAuthor(event.target.value)}
+          value={newAuthor}
+          onChange={(event) => setNewAuthor(event.target.value)}
           required
           type="text"
           placeholder="Yor author"
@@ -24,8 +29,8 @@ const CreateForm = (props) => {
       <div>
         url:{" "}
         <input
-          value={props.newUrl}
-          onChange={(event) => props.setNewUrl(event.target.value)}
+          value={newUrl}
+          onChange={(event) => setNewUrl(event.target.value)}
           required
           type="text"
           placeholder="Yor URL"

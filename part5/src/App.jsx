@@ -2,18 +2,17 @@ import { useState, useEffect } from "react";
 import Blog from "./components/Blog";
 import LoginForm from "./components/LoginForm";
 import CreateForm from "./components/CreateForm";
+import Togglable from "./components/Togglable";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [newTitle, setNewTitle] = useState("");
-  const [newAuthor, setNewAuthor] = useState("");
-  const [newUrl, setNewUrl] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const [loginVisible, setLoginVisible] = useState(false);
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -73,27 +72,30 @@ const App = () => {
     }
   };
 
-  const loginForm = () => (
-    <LoginForm
-      handleLogin={handleLogin}
-      username={username}
-      password={password}
-      setUsername={setUsername}
-      setPassword={setPassword}
-    />
-  );
+  const loginForm = () => {
+    const hideWhenVisible = { display: loginVisible ? "none" : "" };
+    const showWhenVisible = { display: loginVisible ? "" : "none" };
 
-  const createForm = () => (
-    <CreateForm
-      CreateBlog={CreateBlog}
-      newTitle={newTitle}
-      setNewTitle={setNewTitle}
-      newAuthor={newAuthor}
-      setNewAuthor={setNewAuthor}
-      newUrl={newUrl}
-      setNewUrl={setNewUrl}
-    />
-  );
+    return (
+      <div>
+        <div style={hideWhenVisible}>
+          <button onClick={() => setLoginVisible(true)}>log in</button>
+        </div>
+        <div style={showWhenVisible}>
+          <LoginForm
+            handleLogin={handleLogin}
+            username={username}
+            password={password}
+            setUsername={setUsername}
+            setPassword={setPassword}
+          />
+          <button onClick={() => setLoginVisible(false)}>cancel</button>
+        </div>
+      </div>
+    );
+  };
+
+  const createForm = () => <CreateForm CreateBlog={CreateBlog} />;
 
   const blogForm = () => (
     <div>
@@ -105,6 +107,7 @@ const App = () => {
 
   return (
     <div>
+      <h2>Le site</h2>
       {!user && loginForm()}
       {user && (
         <div>
@@ -112,12 +115,14 @@ const App = () => {
             {user.username} logged in
             <button onClick={handleLogoff}>Logoff</button>
           </p>
-          <h2>blogs</h2>
-          {blogForm()}
-          <h2>Create new blog</h2>
-          {createForm()}
+          <Togglable buttonLabel="Create">
+            <h2>Create new blog</h2>
+            {createForm()}
+          </Togglable>
         </div>
       )}
+      <h2>Blogs</h2>
+      {blogForm()}
       <ToastContainer position="top-right" autoClose={670} />
     </div>
   );
