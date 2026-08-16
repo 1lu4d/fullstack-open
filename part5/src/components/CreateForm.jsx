@@ -1,11 +1,23 @@
 import { useState } from "react";
 
-const CreateForm = (props) => {
+const CreateForm = ({ CreateBlog }) => {
   const [newTitle, setNewTitle] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
   const [newUrl, setNewUrl] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    CreateBlog({
+      title: newTitle,
+      author: newAuthor,
+      url: newUrl,
+    });
+    setNewTitle("");
+    setNewAuthor("");
+    setNewUrl("");
+  };
   return (
-    <form onSubmit={props.CreateBlog}>
+    <form onSubmit={handleSubmit}>
       <div>
         title:{" "}
         <input
