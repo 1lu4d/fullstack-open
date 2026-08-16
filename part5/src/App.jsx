@@ -125,8 +125,6 @@ const App = () => {
     )
   }
 
-  const createForm = () => <CreateForm CreateBlog={handleCreateBlog} />
-
   const blogForm = () => (
     <div>
       {blogs.map((blog) => (
@@ -152,7 +150,7 @@ const App = () => {
           </p>
           <Togglable ref={togglableRef} buttonLabel="Create neb blog">
             <h2>Create new</h2>
-            {createForm()}
+            <CreateForm CreateBlog={handleCreateBlog} />
           </Togglable>
         </div>
       )}

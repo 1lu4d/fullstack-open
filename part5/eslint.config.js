@@ -40,5 +40,13 @@ export default [
       'no-console': 'off'
     }
   },
+  {
+    files: ['**/*.test.{js,jsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.vitest
+      }
+    }
+  },
   eslintConfigPrettier
 ]

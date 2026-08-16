@@ -1,58 +1,58 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 const CreateForm = ({ CreateBlog }) => {
-  const [newTitle, setNewTitle] = useState("");
-  const [newAuthor, setNewAuthor] = useState("");
-  const [newUrl, setNewUrl] = useState("");
+  const [newTitle, setNewTitle] = useState('')
+  const [newAuthor, setNewAuthor] = useState('')
+  const [newUrl, setNewUrl] = useState('')
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     CreateBlog({
       title: newTitle,
       author: newAuthor,
-      url: newUrl,
-    });
-    setNewTitle("");
-    setNewAuthor("");
-    setNewUrl("");
-  };
+      url: newUrl
+    })
+    setNewTitle('')
+    setNewAuthor('')
+    setNewUrl('')
+  }
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        title:{" "}
+        title:{' '}
         <input
           value={newTitle}
           onChange={(event) => setNewTitle(event.target.value)}
           required
           type="text"
-          placeholder="Yor title"
+          placeholder="type title"
         />
       </div>
       <div>
-        author:{" "}
+        author:{' '}
         <input
           value={newAuthor}
           onChange={(event) => setNewAuthor(event.target.value)}
           required
           type="text"
-          placeholder="Yor author"
+          placeholder="type author"
         />
       </div>
       <div>
-        url:{" "}
+        url:{' '}
         <input
           value={newUrl}
           onChange={(event) => setNewUrl(event.target.value)}
           required
           type="text"
-          placeholder="Yor URL"
+          placeholder="type url"
         />
       </div>
       <div>
         <button type="submit">Create</button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default CreateForm;
+export default CreateForm
