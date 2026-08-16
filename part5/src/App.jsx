@@ -109,7 +109,7 @@ const App = () => {
     return (
       <div>
         <div style={hideWhenVisible}>
-          <button onClick={() => setLoginVisible(true)}>log in</button>
+          <button onClick={() => setLoginVisible(true)}>login</button>
         </div>
         <div style={showWhenVisible}>
           <LoginForm
@@ -145,10 +145,10 @@ const App = () => {
       {user && (
         <div>
           <p>
-            {user.username} logged in
+            Logged in as {user.username}
             <button onClick={handleLogoff}>Logoff</button>
           </p>
-          <Togglable ref={togglableRef} buttonLabel="Create neb blog">
+          <Togglable ref={togglableRef} buttonLabel="Create new blog">
             <h2>Create new</h2>
             <CreateForm CreateBlog={handleCreateBlog} />
           </Togglable>

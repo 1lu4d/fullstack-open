@@ -9,6 +9,11 @@ const config = require('./utils/config.js')
 const { info, error } = require('./utils/logger')
 const middleware = require('./utils/middleware')
 
+if (process.env.NODE_ENV === 'test') {
+  const testingRouter = require('./controllers/testing')
+  app.use('/api/testing', testingRouter)
+}
+
 mongoose.set('strictQuery', false)
 
 console.log('connecting to', config.MONGODB_URI)

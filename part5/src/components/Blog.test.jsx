@@ -67,7 +67,7 @@ describe('CreateForm component', () => {
     const mockCreateBlog = vi.fn()
     const user = userEvent.setup()
 
-    const { container } = render(<CreateForm CreateBlog={mockCreateBlog} />)
+    render(<CreateForm CreateBlog={mockCreateBlog} />)
 
     // Find inputs by their placeholder or label text
     const titleInput = screen.getByPlaceholderText('type title')

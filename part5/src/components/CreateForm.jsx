@@ -19,34 +19,40 @@ const CreateForm = ({ CreateBlog }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        title:{' '}
-        <input
-          value={newTitle}
-          onChange={(event) => setNewTitle(event.target.value)}
-          required
-          type="text"
-          placeholder="type title"
-        />
+        <label>
+          title:{' '}
+          <input
+            value={newTitle}
+            onChange={(event) => setNewTitle(event.target.value)}
+            required
+            type="text"
+            placeholder="type title"
+          />
+        </label>
       </div>
       <div>
-        author:{' '}
-        <input
-          value={newAuthor}
-          onChange={(event) => setNewAuthor(event.target.value)}
-          required
-          type="text"
-          placeholder="type author"
-        />
+        <label>
+          author:{' '}
+          <input
+            value={newAuthor}
+            onChange={(event) => setNewAuthor(event.target.value)}
+            required
+            type="text"
+            placeholder="type author"
+          />
+        </label>
       </div>
       <div>
-        url:{' '}
-        <input
-          value={newUrl}
-          onChange={(event) => setNewUrl(event.target.value)}
-          required
-          type="text"
-          placeholder="type url"
-        />
+        <label>
+          url:{' '}
+          <input
+            value={newUrl}
+            onChange={(event) => setNewUrl(event.target.value)}
+            required
+            type="text"
+            placeholder="type url"
+          />
+        </label>
       </div>
       <div>
         <button type="submit">Create</button>
