@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { TextField, Button, Stack, Typography } from '@mui/material'
 
 const CreateForm = ({ handleCreateBlog }) => {
   const [newTitle, setNewTitle] = useState('')
@@ -17,48 +18,39 @@ const CreateForm = ({ handleCreateBlog }) => {
     setNewUrl('')
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create nouveau blogh</h2>
-      <div>
-        <label>
-          title:{' '}
-          <input
+    <div>
+      <Typography variant="h4" sx={{ mb: 2, mt: 2 }}>
+        Create nouveau blogh
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={2} sx={{ maxWidth: 400 }}>
+          <TextField
             value={newTitle}
             onChange={(event) => setNewTitle(event.target.value)}
             required
-            type="text"
-            placeholder="type title"
+            placeholder="title"
+            size="small"
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          author:{' '}
-          <input
+          <TextField
             value={newAuthor}
             onChange={(event) => setNewAuthor(event.target.value)}
             required
-            type="text"
-            placeholder="type author"
+            placeholder="author"
+            size="small"
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          url:{' '}
-          <input
+          <TextField
             value={newUrl}
             onChange={(event) => setNewUrl(event.target.value)}
             required
-            type="text"
-            placeholder="type url"
+            placeholder="url"
+            size="small"
           />
-        </label>
-      </div>
-      <div>
-        <button type="submit">Create</button>
-      </div>
-    </form>
+          <Button type="submit" variant="contained">
+            Create
+          </Button>
+        </Stack>
+      </form>
+    </div>
   )
 }
 

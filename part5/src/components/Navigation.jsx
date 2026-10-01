@@ -1,24 +1,28 @@
 import { Link } from 'react-router-dom'
+import { AppBar, Button, Toolbar } from '@mui/material'
 
 const Navigation = ({ user, handleLogoff }) => {
-  const padding = { padding: 5 }
-
+  const style = { '&:hover': { bgcolor: 'rgba(255,255,255,0.3)' } }
   return (
-    <div>
-      <Link style={padding} to="/">
-        blogs
-      </Link>
-      <Link style={padding} to="/create">
-        nouveau blogh
-      </Link>
-      {user ? (
-        <button onClick={handleLogoff}>logoff</button>
-      ) : (
-        <Link style={padding} to="/login">
-          login
-        </Link>
-      )}
-    </div>
+    <AppBar position="static">
+      <Toolbar>
+        <Button color="inherit" component={Link} to="/" sx={style}>
+          blogs
+        </Button>
+        <Button color="inherit" component={Link} to="/create" sx={style}>
+          nouveau blogh
+        </Button>
+        {user ? (
+          <Button color="inherit" onClick={handleLogoff} sx={style}>
+            logoff
+          </Button>
+        ) : (
+          <Button color="inherit" component={Link} to="/login" sx={style}>
+            login
+          </Button>
+        )}
+      </Toolbar>
+    </AppBar>
   )
 }
 

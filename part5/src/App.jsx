@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import BlogList from './components/BlogList'
 import Blog from './components/Blog'
-import Home from './components/Home'
+import { Container } from '@mui/material'
 import LoginForm from './components/LoginForm'
 import CreateForm from './components/CreateForm'
 import Navigation from './components/Navigation'
@@ -52,6 +52,7 @@ const App = () => {
     window.localStorage.removeItem('loggedBlogappUser')
     blogService.setToken(null)
     setUser(null)
+    navigate('/login')
     toast.info('Logged out successfully')
   }
 
@@ -114,7 +115,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <Container>
       <Navigation user={user} handleLogoff={handleLogoff} />
       <Routes>
         <Route
@@ -157,7 +158,7 @@ const App = () => {
       </Routes>
       {DialogComponent}
       <ToastContainer position="top-right" autoClose={670} />
-    </>
+    </Container>
   )
 }
 
