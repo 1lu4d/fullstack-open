@@ -8,7 +8,10 @@ blogsRouter.get('/', async (request, response) => {
 })
 
 blogsRouter.get('/:id', async (request, response) => {
-  const blog = await Blog.findById(request.params.id)
+  const blog = await Blog.findById(request.params.id).populate('user', {
+    username: 1,
+    name: 1
+  })
   if (blog) {
     response.json(blog)
   } else {
@@ -16,7 +19,7 @@ blogsRouter.get('/:id', async (request, response) => {
   }
 })
 
-blogsRouter.put('/:id', async (request, response) => {
+blogsRouter.put('/:id', middleware.userExtractor, async (request, response) => {
   const body = request.body
 
   const blog = {
@@ -30,7 +33,7 @@ blogsRouter.put('/:id', async (request, response) => {
     returnDocument: 'after',
     runValidators: true,
     context: 'query'
-  })
+  }).populate('user', { username: 1, name: 1 })
 
   if (updatedBlog) {
     response.json(updatedBlog)
@@ -55,7 +58,8 @@ blogsRouter.post('/', middleware.userExtractor, async (request, response) => {
   user.blogs = user.blogs.concat(savedBlog.id)
   await user.save()
 
-  response.status(201).json(savedBlog)
+  const populated = await savedBlog.populate('user', { username: 1, name: 1 })
+  response.status(201).json(populated)
 })
 
 blogsRouter.delete(
@@ -63,17 +67,14 @@ blogsRouter.delete(
   middleware.userExtractor,
   async (request, response) => {
     const user = request.user
-
     const blog = await Blog.findById(request.params.id)
 
     if (!blog) {
       return response.status(404).json({ error: 'blog not found' })
     }
-
     if (!blog.user) {
       return response.status(400).json({ error: 'blog has no user' })
     }
-
     if (blog.user.toString() !== user.id.toString()) {
       return response
         .status(403)
@@ -81,6 +82,10 @@ blogsRouter.delete(
     }
 
     await Blog.findByIdAndDelete(request.params.id)
+
+    user.blogs = user.blogs.filter((b) => b.toString() !== blog.id.toString())
+    await user.save()
+
     response.status(204).end()
   }
 )

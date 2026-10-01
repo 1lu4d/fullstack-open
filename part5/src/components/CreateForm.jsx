@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
-const CreateForm = ({ CreateBlog }) => {
+const CreateForm = ({ handleCreateBlog }) => {
   const [newTitle, setNewTitle] = useState('')
   const [newAuthor, setNewAuthor] = useState('')
   const [newUrl, setNewUrl] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    CreateBlog({
+    handleCreateBlog({
       title: newTitle,
       author: newAuthor,
       url: newUrl
@@ -18,6 +18,7 @@ const CreateForm = ({ CreateBlog }) => {
   }
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Create nouveau blogh</h2>
       <div>
         <label>
           title:{' '}

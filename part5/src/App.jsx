@@ -1,14 +1,20 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import BlogList from './components/BlogList'
 import Blog from './components/Blog'
+import Home from './components/Home'
 import LoginForm from './components/LoginForm'
 import CreateForm from './components/CreateForm'
-import Togglable from './components/Togglable'
+import Navigation from './components/Navigation'
 import useConfirmDialog from './hooks/useConfirmDialog'
 import blogService from './services/blogs'
 import loginService from './services/login'
+
+import { Routes, Route, useNavigate } from 'react-router-dom'
+
 import { ToastContainer, toast } from 'react-toastify'
 
 const App = () => {
+  const navigate = useNavigate()
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -21,8 +27,6 @@ const App = () => {
     }
     return null
   })
-  const [loginVisible, setLoginVisible] = useState(false)
-  const togglableRef = useRef()
   const { confirmDialog, DialogComponent } = useConfirmDialog()
 
   useEffect(() => {
@@ -32,11 +36,10 @@ const App = () => {
   }, [])
 
   const handleCreateBlog = async (blogObject) => {
-    event.preventDefault()
     try {
-      togglableRef.current.toggleVisibility()
       const createdBlog = await blogService.create(blogObject)
       setBlogs([...blogs, createdBlog].sort((a, b) => b.likes - a.likes))
+      navigate('/')
       toast.success(`Added new blog: ${createdBlog.title} by ${user.username}`)
     } catch (error) {
       toast.error('Failed to add blog')
@@ -45,7 +48,7 @@ const App = () => {
   }
 
   const handleLogoff = (event) => {
-    event.preventDefault()
+    event?.preventDefault()
     window.localStorage.removeItem('loggedBlogappUser')
     blogService.setToken(null)
     setUser(null)
@@ -61,6 +64,7 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      navigate('/')
       toast.success(`Logged in as ${user.username}`)
     } catch {
       toast.error('wrong credentials')
@@ -68,8 +72,14 @@ const App = () => {
   }
 
   const handleLike = async (blog) => {
+    if (!user) {
+      toast.error('Log in to like blogs')
+      return
+    }
     const updatedBlog = {
-      ...blog,
+      title: blog.title,
+      author: blog.author,
+      url: blog.url,
       likes: blog.likes + 1
     }
     try {
@@ -94,6 +104,7 @@ const App = () => {
       try {
         await blogService.remove(blog.id)
         setBlogs(blogs.filter((b) => b.id !== blog.id))
+        navigate('/')
         toast.success(`Removed "${blog.title}"`)
       } catch (error) {
         toast.error(`Failed to delete ${blog.title}`)
@@ -102,63 +113,51 @@ const App = () => {
     }
   }
 
-  const loginForm = () => {
-    const hideWhenVisible = { display: loginVisible ? 'none' : '' }
-    const showWhenVisible = { display: loginVisible ? '' : 'none' }
-
-    return (
-      <div>
-        <div style={hideWhenVisible}>
-          <button onClick={() => setLoginVisible(true)}>login</button>
-        </div>
-        <div style={showWhenVisible}>
-          <LoginForm
-            handleLogin={handleLogin}
-            username={username}
-            password={password}
-            setUsername={setUsername}
-            setPassword={setPassword}
-          />
-          <button onClick={() => setLoginVisible(false)}>cancel</button>
-        </div>
-      </div>
-    )
-  }
-
-  const blogForm = () => (
-    <div>
-      {blogs.map((blog) => (
-        <Blog
-          key={blog.id}
-          blog={blog}
-          handleLike={handleLike}
-          handleRemove={handleRemove}
-        />
-      ))}
-    </div>
-  )
-
   return (
-    <div>
-      <h2>Le site</h2>
-      {!user && loginForm()}
-      {user && (
-        <div>
-          <p>
-            Logged in as {user.username}
-            <button onClick={handleLogoff}>Logoff</button>
-          </p>
-          <Togglable ref={togglableRef} buttonLabel="Create new blog">
-            <h2>Create new</h2>
-            <CreateForm CreateBlog={handleCreateBlog} />
-          </Togglable>
-        </div>
-      )}
-      <h2>Blogs</h2>
-      {blogForm()}
+    <>
+      <Navigation user={user} handleLogoff={handleLogoff} />
+      <Routes>
+        <Route
+          path="/blogs/:id"
+          element={
+            <Blog
+              blogs={blogs}
+              user={user}
+              handleLike={handleLike}
+              handleRemove={handleRemove}
+            />
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <BlogList
+              blogs={blogs}
+              handleLike={handleLike}
+              handleRemove={handleRemove}
+            />
+          }
+        />
+        <Route
+          path="/create"
+          element={<CreateForm handleCreateBlog={handleCreateBlog} />}
+        />
+        <Route
+          path="/login"
+          element={
+            <LoginForm
+              handleLogin={handleLogin}
+              username={username}
+              password={password}
+              setUsername={setUsername}
+              setPassword={setPassword}
+            />
+          }
+        />
+      </Routes>
       {DialogComponent}
       <ToastContainer position="top-right" autoClose={670} />
-    </div>
+    </>
   )
 }
 
